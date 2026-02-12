@@ -1,0 +1,115 @@
+.wish-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:12px}
+
+.wish-page{
+  min-height:80vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f6f6f7;
+  padding:40px 20px;
+}
+
+.wish-page.access-denied{
+  padding:60px 20px;
+}
+
+.wish-card{
+  width:100%;
+  max-width:520px;
+  background:#fff;
+  border-radius:8px;
+  padding:32px;
+  box-shadow:0 8px 30px rgba(18,20,25,0.06);
+  border:1px solid rgba(0,0,0,0.04);
+  text-align:center;
+}
+
+.wish-card h2{
+  margin:0 0 16px 0;
+  font-weight:600;
+  font-size:24px;
+  color:#333;
+}
+
+.wish-card p{
+  margin:0 0 24px 0;
+  color:#666;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.wish-card .btn{
+  width:100%;
+}
+
+.wish-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:12px}
+.wish-card{background:#fff;border:1px solid #ececec;border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.wish-img{display:block;padding:12px;background:#f8f6f7;align-items:center;justify-content:center}
+.wish-img img{width:100%;height:140px;object-fit:contain}
+.wish-body{padding:10px;display:flex;flex-direction:column;gap:8px}
+.wish-title{font-weight:700}
+.wish-price{color:var(--brand);font-weight:700}
+.wish-actions{display:flex;gap:8px}
+.wish-actions .btn{
+  padding:8px 12px;
+  border-radius:6px;
+  border:1px solid #ddd;
+  cursor:pointer;
+  font-weight:600;
+  font-size:13px;
+  transition:all .2s;
+  flex:1;
+  text-align:center;
+}
+
+.wish-actions .btn-remove{
+  background:#fff;
+  color:#666;
+}
+
+.wish-actions .btn-remove:hover{
+  border-color:#ff5fb7;
+  color:#ff5fb7;
+}
+
+.wish-actions .btn-add{
+  background:linear-gradient(135deg, #7b61ff 0%, #ff5fb7 100%);
+  border:none;
+  color:#fff;
+  box-shadow:0 2px 8px rgba(255, 95, 183, 0.15);
+}
+
+.wish-actions .btn-add:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(255, 95, 183, 0.3);
+}
+
+@media (max-width:520px){
+  .wish-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+  padding:12px 18px;
+  border:1px solid rgba(0,0,0,0.06);
+  background:#fff;
+  cursor:pointer;
+  font-weight:600;
+  font-size:15px;
+  transition:all .2s;
+}
+
+.btn.primary{
+  background:linear-gradient(135deg, #7b61ff 0%, #ff5fb7 100%);
+  color:#fff;
+  border:none;
+  width:100%;
+}
+
+.btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(255, 95, 183, 0.3);
+}

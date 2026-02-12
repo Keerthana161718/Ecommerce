@@ -1,0 +1,32 @@
+.product-page{display:flex;gap:32px;align-items:flex-start}
+.left-col{display:flex;gap:12px;flex:2}
+.thumbs{display:flex;flex-direction:column;gap:10px}
+.thumb{width:72px;height:72px;padding:6px;border-radius:8px;border:1px solid #eee;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.thumb img{width:100%;height:100%;object-fit:cover;border-radius:4px}
+.thumb.active{box-shadow:0 8px 20px rgba(11,116,222,0.06);border-color:rgba(11,116,222,0.18)}
+.main-image{background:#fff;padding:18px;border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(18,20,25,0.04);width:100%;height:620px;position:relative}
+.main-image img{width:100%;height:100%;object-fit:contain;border-radius:6px}
+.right-col{flex:1;max-width:420px}
+.detail-card{background:#fff;border-radius:8px;padding:20px;border:1px solid #ececec}
+.breadcrumbs{font-size:13px;color:var(--muted);margin-bottom:8px}
+.prod-name{margin:0 0 6px}
+.fav{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;color:#ff5fb7}
+.prod-brand{color:var(--muted);margin-bottom:8px}
+.prod-price{font-size:20px;font-weight:700;color:var(--brand);margin-bottom:12px}
+.prod-desc{color:#333;line-height:1.4}
+.qty-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
+.qty-control{display:inline-flex;align-items:center;border:1px solid #e6e6ea;border-radius:6px;overflow:hidden}
+.qty-control button{padding:8px 12px;border:none;background:#fff;cursor:pointer}
+.qty-control span{padding:8px 14px;min-width:36px;text-align:center}
+.actions{display:flex;gap:12px;margin-top:18px}
+.btn{padding:12px 18px;border-radius:999px;border:1px solid rgba(0,0,0,0.08);cursor:pointer;font-weight:700}
+.btn.add-cart{background:#fff;border:1px solid #ddd;color:#111}
+.btn.buy-now{background:linear-gradient(90deg,#7b61ff,#ff5fb7);color:#fff;border:none}
+
+@media (max-width:900px){
+	.product-page{flex-direction:column}
+	.left-col{flex-direction:row}
+	.thumbs{flex-direction:row}
+	.thumb{width:56px;height:56px}
+	.main-image img{max-width:100%;max-height:360px}
+}
