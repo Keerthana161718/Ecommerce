@@ -58,18 +58,57 @@ export default function Header(){
         </form>
 
         <nav className="desktop-nav">
-          <Link to="/cart">Cart{cartCount>0?` (${cartCount})`:''}</Link>
-          <Link to="/wishlist" style={{marginLeft:12}}>Wishlist</Link>
+          {/* Only show cart/wishlist/profile and other protected links when authenticated */}
           {token ? (
-            <button onClick={handleLogout} className="link-like">Logout</button>
-          ) : (
             <>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
+              <Link to="/cart" className="nav-icon"> 
+                <span className="icon">🛒</span>
+                <span className="nav-text">Cart{cartCount>0?` (${cartCount})`:''}</span>
+              </Link>
+              <Link to="/wishlist" className="nav-icon" style={{marginLeft:12}}>
+                <span className="icon">♡</span>
+                <span className="nav-text">Wishlist</span>
+              </Link>
+              <Link to="/profile" className="nav-icon" style={{marginLeft:12}}>
+                <span className="icon">👤</span>
+                <span className="nav-text">Profile</span>
+              </Link>
+              <Link to="/my-orders" className="nav-icon" style={{marginLeft:12}}>
+                <span className="icon">📦</span>
+                <span className="nav-text">My Orders</span>
+              </Link>
+              {user && user.role === 'seller' && (
+                <>
+                  <Link to="/notifications" className="nav-icon" style={{marginLeft:12, color:'#667eea'}}>
+                    <span className="icon">🔔</span>
+                    <span className="nav-text">Notifications</span>
+                  </Link>
+                  <Link to="/seller" className="nav-icon" style={{marginLeft:12}}>
+                    <span className="icon">🏬</span>
+                    <span className="nav-text">Seller</span>
+                  </Link>
+                </>
+              )}
+              {user && user.role === 'admin' && (
+                <Link to="/admin" className="nav-link" style={{marginLeft:12, color:'#667eea', fontWeight:600}}>
+                  Admin
+                </Link>
+              )}
+              <button onClick={handleLogout} className="link-like nav-icon" style={{marginLeft:12}}>
+                <span className="icon">↩️</span>
+                <span className="nav-text">Logout</span>
+              </button>
             </>
-          )}
-          {user && user.role === 'seller' && (
-            <Link to="/seller" style={{marginLeft:12}}>Seller</Link>
+          ) : (
+            /* Not logged in: only show Login/Register */
+            <>
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+              <Link to="/register" className="nav-link">
+                Register
+              </Link>
+            </>
           )}
         </nav>
       </div>
@@ -77,20 +116,56 @@ export default function Header(){
       {/* Mobile Sidebar */}
       <div className={`mobile-sidebar ${sidebarOpen ? 'open' : ''}`}>
         <nav className="sidebar-nav">
-          <Link to="/cart" onClick={closeSidebar}>
-            Cart{cartCount>0?` (${cartCount})`:''} 
-          </Link>
-          <Link to="/wishlist" onClick={closeSidebar}>Wishlist</Link>
           {token ? (
-            <button onClick={handleLogout} className="link-like sidebar-logout">Logout</button>
+            <>
+              <Link to="/cart" onClick={closeSidebar} className="nav-icon">
+                <span className="icon">🛒</span>
+                <span className="nav-text">Cart{cartCount>0?` (${cartCount})`:''}</span>
+              </Link>
+              <Link to="/wishlist" onClick={closeSidebar} className="nav-icon">
+                <span className="icon">♡</span>
+                <span className="nav-text">Wishlist</span>
+              </Link>
+              <Link to="/profile" onClick={closeSidebar} className="nav-icon">
+                <span className="icon">👤</span>
+                <span className="nav-text">Profile</span>
+              </Link>
+              <Link to="/my-orders" onClick={closeSidebar} className="nav-icon">
+                <span className="icon">📦</span>
+                <span className="nav-text">My Orders</span>
+              </Link>
+              {user && user.role === 'seller' && (
+                <>
+                  <Link to="/notifications" onClick={closeSidebar} className="nav-icon" style={{color:'#667eea'}}>
+                    <span className="icon">🔔</span>
+                    <span className="nav-text">Notifications</span>
+                  </Link>
+                  <Link to="/seller" onClick={closeSidebar} className="nav-icon">
+                    <span className="icon">🏬</span>
+                    <span className="nav-text">Seller</span>
+                  </Link>
+                </>
+              )}
+              {user && user.role === 'admin' && (
+                <Link to="/admin" onClick={closeSidebar} className="nav-icon" style={{color:'#667eea', fontWeight:600}}>
+                  <span className="icon">⚙️</span>
+                  <span className="nav-text">Admin</span>
+                </Link>
+              )}
+              <button onClick={handleLogout} className="link-like sidebar-logout nav-icon"> 
+                <span className="icon">↩️</span>
+                <span className="nav-text">Logout</span>
+              </button>
+            </>
           ) : (
             <>
-              <Link to="/login" onClick={closeSidebar}>Login</Link>
-              <Link to="/register" onClick={closeSidebar}>Register</Link>
+              <Link to="/login" onClick={closeSidebar} className="nav-icon">
+                <span className="nav-text">Login</span>
+              </Link>
+              <Link to="/register" onClick={closeSidebar} className="nav-icon">
+                <span className="nav-text">Register</span>
+              </Link>
             </>
-          )}
-          {user && user.role === 'seller' && (
-            <Link to="/seller" onClick={closeSidebar}>Seller</Link>
           )}
         </nav>
       </div>

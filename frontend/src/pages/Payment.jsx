@@ -36,7 +36,7 @@ export default function Payment(){
     
     setProducts(state.products)
     setTotal(state.total || 0)
-  }, [location.state, navigate])
+  }, [location.state])
 
   const handleChange = (e) => {
     const { name, value } = e.target

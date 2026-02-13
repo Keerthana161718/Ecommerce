@@ -55,6 +55,29 @@ export const api = {
   getWishlist: () => request('/wishlist'),
   addToWishlist: (data) => request('/wishlist', { method: 'POST', body: JSON.stringify(data) }),
   removeFromWishlist: (productId) => request(`/wishlist/${productId}`, { method: 'DELETE' }),
-  // payment
+  // payment & orders
   processPayment: (data) => request('/orders', { method: 'POST', body: JSON.stringify(data) }),
+  getOrders: () => request('/orders/myorders'),
+  getOrderDetails: (id) => request(`/orders/${id}`),
+  // seller orders
+  getSellerOrders: () => request('/orders/seller/orders'),
+  confirmOrderItem: (orderId, itemIndex) => request(`/orders/${orderId}/items/${itemIndex}/confirm`, { method: 'PUT' }),
+  shipOrderItem: (orderId, itemIndex) => request(`/orders/${orderId}/items/${itemIndex}/ship`, { method: 'PUT' }),
+  // seller products
+  getSellerProducts: () => request('/products/seller/my-products'),
+  updateProductStock: (productId, data) => request(`/products/${productId}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteProduct: (productId) => request(`/products/${productId}`, { method: 'DELETE' }),
+  // notifications
+  getNotifications: () => request('/notifications'),
+  getUnreadCount: () => request('/notifications/unread/count'),
+  markNotificationAsRead: (id) => request(`/notifications/${id}/read`, { method: 'PUT' }),
+  markAllAsRead: () => request('/notifications/all/read', { method: 'PUT' }),
+  // user profile
+  getUserProfile: () => request('/users/profile'),
+  updateUserProfile: (data) => request('/users/profile', { method: 'PUT', body: JSON.stringify(data) }),
+  // admin
+  getAllOrders: () => request('/admin/orders'),
+  getAllUsers: () => request('/admin/users'),
+  getAllProducts: () => request('/admin/products'),
+  getDashboardStats: () => request('/admin/stats'),
 }

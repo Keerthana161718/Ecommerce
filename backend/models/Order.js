@@ -18,6 +18,17 @@ const orderSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
         },
+        seller: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        status: {
+          type: String,
+          enum: ["pending", "confirmed", "shipped", "delivered", "cancelled"],
+          default: "pending",
+        },
+        confirmedAt: Date,
+        shippedAt: Date,
       },
     ],
 
@@ -47,6 +58,12 @@ const orderSchema = new mongoose.Schema(
 
     isPaid: { type: Boolean, default: false },
     paidAt: Date,
+
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "shipped", "delivered", "cancelled"],
+      default: "pending",
+    },
 
     isDelivered: { type: Boolean, default: false },
     deliveredAt: Date,

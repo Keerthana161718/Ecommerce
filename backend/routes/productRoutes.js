@@ -6,6 +6,7 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
+  getSellerProducts,
 } = require("../controllers/productController");
 
 const { protect, admin, seller } = require("../middleware/authMiddleware");
@@ -33,9 +34,12 @@ router.route("/")
     next()
   }, createProduct);
 
+// Seller routes (MUST come before /:id)
+router.get("/seller/my-products", protect, seller, getSellerProducts);
+
 router.route("/:id")
   .get(getProductById)
-  .put(protect, admin, updateProduct)
-  .delete(protect, admin, deleteProduct);
+  .put(protect, seller, updateProduct)
+  .delete(protect, seller, deleteProduct);
 
 module.exports = router;

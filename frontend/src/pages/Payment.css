@@ -1,7 +1,9 @@
 .payment-container{
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
   max-width:1200px;
   margin:0 auto;
-  padding:20px;
+  padding:40px 20px;
 }
 
 .payment-header{
@@ -25,9 +27,10 @@
 
 .payment-form-section{
   background:#fff;
-  border:1px solid #e0e0e0;
-  border-radius:8px;
-  padding:24px;
+  border:none;
+  border-radius:12px;
+  padding:30px;
+  box-shadow:0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
 .payment-form{
@@ -71,19 +74,19 @@
 
 .form-group input,
 .form-group textarea{
-  padding:10px 12px;
+  padding:12px;
   border:1px solid #ddd;
-  border-radius:6px;
+  border-radius:8px;
   font-size:14px;
   font-family:inherit;
-  transition:border-color .2s;
+  transition:border-color .3s;
 }
 
 .form-group input:focus,
 .form-group textarea:focus{
   outline:none;
-  border-color:#7b61ff;
-  box-shadow:0 0 0 3px rgba(123, 97, 255, 0.1);
+  border-color:#667eea;
+  box-shadow:0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .form-row{
@@ -133,20 +136,21 @@
 
 .submit-btn{
   padding:14px;
-  background:linear-gradient(135deg, #7b61ff 0%, #ff5fb7 100%);
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color:#fff;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   font-size:16px;
   font-weight:600;
   cursor:pointer;
-  transition:all .2s;
+  transition:all .3s;
   margin-top:12px;
+  box-shadow:0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .submit-btn:hover:not(:disabled){
   transform:translateY(-2px);
-  box-shadow:0 4px 12px rgba(255, 95, 183, 0.3);
+  box-shadow:0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
 .submit-btn:disabled{
@@ -253,12 +257,31 @@
 }
 
 @media(max-width:768px){
+  .payment-page {
+    padding: 20px 12px;
+  }
+  
+  .payment-container {
+    padding: 20px 12px;
+  }
+  
+  .payment-header {
+    margin-bottom: 20px;
+    padding: 12px;
+  }
+  
+  .payment-header h1 {
+    font-size: 22px;
+  }
+
   .payment-content{
     grid-template-columns:1fr;
+    gap: 20px;
   }
 
   .payment-summary{
     position:static;
+    padding:16px;
   }
 
   .form-row{
@@ -268,8 +291,157 @@
   .payment-form-section{
     padding:16px;
   }
+  
+  .form-section h2 {
+    font-size: 15px;
+  }
+  
+  .form-group label {
+    font-size: 13px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 10px;
+    font-size: 13px;
+  }
+  
+  .submit-btn {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
 
-  .payment-summary{
-    padding:16px;
+@media (max-width: 480px) {
+  .payment-container {
+    min-height: auto;
+    padding: 16px 8px;
+  }
+  
+  .payment-header {
+    margin-bottom: 16px;
+    padding: 8px;
+  }
+  
+  .payment-header h1 {
+    font-size: 18px;
+  }
+  
+  .payment-content {
+    gap: 12px;
+  }
+  
+  .payment-form-section {
+    padding: 12px 14px;
+    border-radius: 8px;
+  }
+  
+  .form-section {
+    padding-bottom: 14px;
+    margin-bottom: 12px;
+  }
+  
+  .form-section h2 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  
+  .form-group {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .form-group label {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+  
+  .form-row {
+    gap: 10px;
+  }
+  
+  .payment-methods {
+    gap: 10px;
+  }
+  
+  .payment-option {
+    padding: 10px;
+    gap: 10px;
+    border-radius: 6px;
+  }
+  
+  .payment-option input[type="radio"] {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .payment-option span {
+    font-size: 13px;
+  }
+  
+  .submit-btn {
+    padding: 10px 12px;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  .payment-summary {
+    padding: 12px 14px;
+  }
+  
+  .payment-summary h2 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  
+  .summary-items {
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+  }
+  
+  .summary-item {
+    gap: 10px;
+    padding: 6px 0;
+  }
+  
+  .summary-item img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .summary-item .item-name {
+    font-size: 12px;
+  }
+  
+  .summary-item .item-qty,
+  .summary-item .item-price {
+    font-size: 11px;
+  }
+  
+  .summary-item .item-total {
+    font-size: 13px;
+  }
+  
+  .summary-breakdown {
+    gap: 8px;
+  }
+  
+  .breakdown-row {
+    font-size: 12px;
+    padding: 6px 0;
+  }
+  
+  .breakdown-row.total {
+    font-size: 14px;
+    padding: 10px 0;
+    margin-top: 6px;
   }
 }

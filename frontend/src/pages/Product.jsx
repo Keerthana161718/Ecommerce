@@ -95,45 +95,47 @@ export default function Product(){
   const getImgSrc = (img) => (img && (img.url || img)) || '/placeholder.png'
 
   return (
-    <div className="container">
-      <div className="breadcrumbs" style={{marginBottom:12}}>Home &gt; All Products &gt; {product.category || 'Product'}</div>
-      <div className="product-page">
-        <div className="left-col">
-          <div className="thumbs">
-            {images.map((img, i)=> (
-              <button key={i} className={`thumb ${i===selectedImage? 'active':''}`} onClick={()=> setSelectedImage(i)}>
-                <img src={getImgSrc(img)} alt={`thumb-${i}`} />
-              </button>
-            ))}
+    <div style={{ minHeight: 'calc(100vh - 60px)', background: 'linear-gradient(135deg, #667eea 0%, #1d4ed8 100%)', padding: '40px 20px' }}>
+      <div className="container">
+        {/* Breadcrumbs removed per design - only product details shown */}
+        <div className="product-page" style={{background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.15)'}}>
+          <div className="left-col">
+            <div className="thumbs">
+              {images.map((img, i)=> (
+                <button key={i} className={`thumb ${i===selectedImage? 'active':''}`} onClick={()=> setSelectedImage(i)}>
+                  <img src={getImgSrc(img)} alt={`thumb-${i}`} />
+                </button>
+              ))}
+            </div>
+            <div className="main-image">
+              <img src={getImgSrc(images[selectedImage])} alt={product.name} />
+              <button className="fav" onClick={toggleWishlist}>{wishlistIds.has(id) ? '❤' : '♡'}</button>
+            </div>
           </div>
-          <div className="main-image">
-            <img src={getImgSrc(images[selectedImage])} alt={product.name} />
-            <button className="fav" onClick={toggleWishlist}>{wishlistIds.has(id) ? '❤' : '♡'}</button>
-          </div>
-        </div>
 
-        <aside className="right-col">
-          <div className="detail-card">
-            <h1 className="prod-name">{product.name}</h1>
-            {product.brand && <div className="prod-brand">{product.brand}</div>}
-            <div className="prod-price">₹{product.price}</div>
-            <p className="prod-desc">{product.description}</p>
+          <aside className="right-col">
+            <div className="detail-card">
+              <h1 className="prod-name">{product.name}</h1>
+              {product.brand && <div className="prod-brand">{product.brand}</div>}
+              <div className="prod-price">₹{product.price}</div>
+              <p className="prod-desc">{product.description}</p>
 
-            <div className="qty-row">
-              <label>Quantity</label>
-              <div className="qty-control">
-                <button onClick={()=> setQty(Math.max(1, qty-1))}>-</button>
-                <span>{qty}</span>
-                <button onClick={()=> setQty(qty+1)}>+</button>
+              <div className="qty-row">
+                <label>Quantity</label>
+                <div className="qty-control">
+                  <button onClick={()=> setQty(Math.max(1, qty-1))}>-</button>
+                  <span>{qty}</span>
+                  <button onClick={()=> setQty(qty+1)}>+</button>
+                </div>
+              </div>
+
+              <div className="actions">
+                <button className="btn add-cart" onClick={()=> addToCart()}>Add to Cart</button>
+                <button className="btn buy-now" onClick={buyNow}>Buy Now</button>
               </div>
             </div>
-
-            <div className="actions">
-              <button className="btn add-cart" onClick={()=> addToCart()}>Add to Cart</button>
-              <button className="btn buy-now" onClick={buyNow}>Buy Now</button>
-            </div>
-          </div>
-        </aside>
+          </aside>
+        </div>
       </div>
     </div>
   )

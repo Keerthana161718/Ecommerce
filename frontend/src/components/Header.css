@@ -1,8 +1,14 @@
 .container{padding-left:0;padding-right:0}
 .site-header .brand{font-size:1.1rem}
-nav{display:flex;align-items:center}
-nav a, nav .link-like{color:#222;text-decoration:none;padding:.4rem .6rem;border-radius:4px}
+nav{display:flex;align-items:center;gap:0.5rem}
+nav a, nav .link-like{color:#222;text-decoration:none;padding:.4rem .6rem;border-radius:4px;transition:all 0.2s}
 nav a:hover, nav .link-like:hover{background:rgba(11,116,222,0.06)}
+
+@media (max-width: 768px) {
+  nav {
+    display: none;
+  }
+}
 
 /* Mobile Navigation */
 .hamburger-btn {
@@ -47,20 +53,26 @@ nav a:hover, nav .link-like:hover{background:rgba(11,116,222,0.06)}
 .mobile-sidebar {
   display: none;
   position: fixed;
-  left: -100%;
-  top: 0;
-  width: 80%;
-  height: 100vh;
+  /* start hidden off-canvas to the right */
+  right: -420px;
+  left: auto;
+  top: 80px;
+  width: 320px;
+  max-width: 92%;
+  height: auto;
+  max-height: calc(100vh - 160px);
   background-color: #fff;
-  padding-top: 4rem;
+  padding: 1rem;
+  border-radius: 12px;
   z-index: 999;
-  transition: left 0.3s ease;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  transition: right 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
   overflow-y: auto;
 }
 
 .mobile-sidebar.open {
-  left: 0;
+  right: 12px;
+  opacity: 1;
 }
 
 .sidebar-overlay {
@@ -106,11 +118,41 @@ nav a:hover, nav .link-like:hover{background:rgba(11,116,222,0.06)}
 
 .desktop-nav {
   display: flex;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .search-form {
-  flex: 1;
+  flex: 0 1 400px;
+  max-width: 400px;
+  margin: 0 1.5rem;
 }
+
+/* Text-only navigation links */
+.nav-link {
+  color: #222;
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 12px;
+}
+
+.nav-link:hover {
+  background: rgba(11, 116, 222, 0.06);
+  color: #0b74de;
+}
+
+/* Icon + label helpers */
+.nav-icon{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.nav-icon .icon{font-size:18px;line-height:1}
+.nav-icon .nav-text{display:inline-block}
 
 /* Desktop view (768px and above) */
 @media (min-width: 769px) {
@@ -125,6 +167,11 @@ nav a:hover, nav .link-like:hover{background:rgba(11,116,222,0.06)}
   }
   .desktop-nav {
     display: flex;
+  }
+  /* Align search form between logo and icons */
+  .search-form {
+    flex: 0 1 400px;
+    max-width: 400px;
   }
 }
 
@@ -170,6 +217,59 @@ nav a:hover, nav .link-like:hover{background:rgba(11,116,222,0.06)}
   .site-header .brand {
     font-size: 1rem;
   }
+}
+
+/* Mobile sidebar specific icon layout */
+@media (max-width: 768px) {
+  /* Sidebar items: left-aligned icon + label like app navigation */
+  .sidebar-nav a.nav-icon,
+  .sidebar-nav .link-like.nav-icon {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+    padding:14px 16px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #222;
+  }
+
+  .sidebar-nav a.nav-icon .icon,
+  .sidebar-nav .link-like.nav-icon .icon {
+    font-size:20px;
+    margin: 0;
+    width:28px;
+    text-align:center;
+  }
+
+  .sidebar-nav a.nav-icon .nav-text,
+  .sidebar-nav .link-like.nav-icon .nav-text {
+    font-size:16px;
+    line-height:1;
+  }
+
+  /* Make panel align nearer top and provide a visible close space */
+  .mobile-sidebar {
+    top: 64px;
+    padding-top: 8px;
+  }
+
+  /* Overlay should show behind the panel */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 995;
+  }
+}
+
+/* Desktop: keep label visible and icons aligned inline */
+@media (min-width: 769px) {
+  .desktop-nav a.nav-icon, .desktop-nav .link-like.nav-icon { display:inline-flex; align-items:center; gap:8px; }
+  /* Show icons in header and hide labels for compact, app-like header */
+  .desktop-nav a.nav-icon .icon { display:inline-block; font-size:18px; }
+  .desktop-nav a.nav-icon .nav-text { display:none; }
 }
 
 /* Extra small devices (480px and below) */

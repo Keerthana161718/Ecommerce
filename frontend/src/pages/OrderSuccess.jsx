@@ -32,7 +32,7 @@ export default function OrderSuccess(){
     }
 
     setOrder(order)
-  }, [location.state, navigate])
+  }, [location.state])
 
   if (!order) return <div className="center">Loading...</div>
 

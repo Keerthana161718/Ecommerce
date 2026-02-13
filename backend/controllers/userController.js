@@ -32,11 +32,18 @@ exports.updateUserProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
+    // Update basic info
+    if (req.body.name) user.name = req.body.name;
+    if (req.body.email) user.email = req.body.email;
 
+    // Update password if provided
     if (req.body.password) {
       user.password = req.body.password;
+    }
+
+    // Update addresses if provided
+    if (req.body.addresses) {
+      user.addresses = req.body.addresses;
     }
 
     const updatedUser = await user.save();
@@ -46,6 +53,9 @@ exports.updateUserProfile = async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       role: updatedUser.role,
+      addresses: updatedUser.addresses,
+      createdAt: updatedUser.createdAt,
+      updatedAt: updatedUser.updatedAt,
     });
   } catch (err) {
     res.status(500).json({ message: err.message });

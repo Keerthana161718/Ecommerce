@@ -66,6 +66,11 @@ exports.createProduct = async (req, res) => {
     console.log('createProduct req.body:', body)
     console.log('createProduct files:', req.files && req.files.length)
 
+    // Assign the authenticated user as the seller
+    if (req.user) {
+      body.seller = req.user._id || req.user.id
+    }
+
     // if files uploaded via multer (memoryStorage), upload to Cloudinary or local
     if(req.files && req.files.length){
       const uploads = []
@@ -102,14 +107,55 @@ exports.createProduct = async (req, res) => {
 
 // Update
 exports.updateProduct = async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  Object.assign(product, req.body);
-  const updated = await product.save();
-  res.json(updated);
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    // Check if user owns this product (for sellers)
+    if (req.user.role === 'seller' && product.seller.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Not authorized to update this product" });
+    }
+
+    Object.assign(product, req.body);
+    const updated = await product.save();
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 // Delete
 exports.deleteProduct = async (req, res) => {
-  await Product.findByIdAndDelete(req.params.id);
-  res.json({ message: "Product removed" });
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    // Check if user owns this product (for sellers)
+    if (req.user.role === 'seller' && product.seller.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Not authorized to delete this product" });
+    }
+
+    await Product.findByIdAndDelete(req.params.id);
+    res.json({ message: "Product removed" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Get seller's products
+exports.getSellerProducts = async (req, res) => {
+  try {
+    const sellerId = req.user._id;
+    const products = await Product.find({ seller: sellerId })
+      .populate('seller', 'name email')
+      .sort({ createdAt: -1 });
+    
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };

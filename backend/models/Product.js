@@ -19,6 +19,11 @@ const productSchema = new mongoose.Schema(
     brand: { type: String },
     countInStock: { type: Number, default: 0 },
 
+    seller: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+
     images: [
       {
         url: String,
