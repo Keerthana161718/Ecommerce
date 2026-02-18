@@ -5,7 +5,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "YOUR_RENDER_BACKEND_URL/api/:splat"
+  to = "https://ecommerce-x05i.onrender.com/api/:splat"
   status = 200
 
 # Redirect all routes to index.html for React Router
